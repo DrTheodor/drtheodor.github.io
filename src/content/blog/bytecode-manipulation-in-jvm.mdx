@@ -17,10 +17,10 @@ When you compile your `.java` files you get `.class` files. Class files are the 
 
 Each byte is a different instruction (or character, if it's a string). Don't worry, you won't have to memorize what byte corresponds to what instruction.
 
-So what you need to do, to modify bytecode of a class, you just need to parse the bytes, change a few bytes and write it back! Sounds rather simple, but how do you make JVM load the modifed class instead of the original? And is there a more convenient way of parsing bytecode? I mean, it's gonna get nasty when you'll try to build a house with a stone hatchet.
+So what you need to do, to modify bytecode of a class, you just need to parse the bytes, change a few bytes and write it back! Sounds rather simple, but _how do you make JVM load the modifed class_ instead of the original? And is there a _more convenient way of parsing bytecode_? I mean, it's gonna get nasty when you'll try to build a house with a stone hatchet.
 
 ## Libraries
-There are not many bytecode manipulation libraries out there. Here are some of them:
+There are not many bytecode manipulation libraries we can use out there. Here are some of the most popular solutions:
 ### ObjectWeb ASM:
 - Active development.
 - Open-source: `BSD 3-Clause "New" or "Revised" License`.
@@ -51,4 +51,12 @@ If you want to hack something quickly without putting too much effort, Javassist
 In this blog post I'm going to cover the use of ObjectWeb ASM and some of the ByteBuddy's tooling (more on that later).
 
 
+## How to load the modified class?
+Let's say that we modified a class, or we loaded it from memory. How to make JVM load the class from bytes?
+Really, there are 2 solutions, and you should choose which one to use depending on your use-case.
 
+### 1. ClassLoader
+ClassLoaders are special classes that handle class loading, and, conveniently, they have a protected method, called `defineClass` which accepts an array of bytes (the bytecode), it's length, offset and the Class' name.
+Unfortunately, in the latest Java versions you can't use reflections to invoke that method, so you have to subclass the ClassLoader and override the method. Then, you can either override class loading (via checking the class name) or make the method public for later use. The difference is: one intercepts JVM loading a class, and the other allows for other classes to define classes at runtime.
+
+### 2. Agents
