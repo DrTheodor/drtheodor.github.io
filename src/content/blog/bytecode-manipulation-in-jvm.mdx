@@ -21,7 +21,7 @@ So what you need to do, to modify bytecode of a class, you just need to parse th
 
 ## Libraries
 There are not many bytecode manipulation libraries out there. Here are some of them:
-### ASM:
+### ObjectWeb ASM:
 - Active development.
 - Open-source: `BSD 3-Clause "New" or "Revised" License`.
 - Apparently, used by Java's compiler, SpongePowered's Mixins and various build tools.
@@ -42,4 +42,13 @@ There are not many bytecode manipulation libraries out there. Here are some of t
 - Abstracts bytecode manipulation a lot.
 - Open source: `Apache License 2.0`.
 - High level.
+
+Which one of these to use? The answer is, as always, it depends. 
+If you want to generate some code (if you're making a gradle plugin for example), then you'll likely find ByteBuddy the easiest to use.
+If you want full control - you'll find that ASM is your only option.
+If you want to hack something quickly without putting too much effort, Javassist may be the tool for you.
+
+In this blog post I'm going to cover the use of ObjectWeb ASM and some of the ByteBuddy's tooling (more on that later).
+
+
 
