@@ -1,5 +1,5 @@
 ---
-title: 'Bytecode manipulation in Java'
+title: 'Bytecode manipulation in JVM'
 description: 'An introduction to bytecode manipulation with Java!'
 pubDate: 'Feb 09 2024'
 heroImage: '/bytecode.png'
@@ -17,7 +17,29 @@ When you compile your `.java` files you get `.class` files. Class files are the 
 
 Each byte is a different instruction (or character, if it's a string). Don't worry, you won't have to memorize what byte corresponds to what instruction.
 
-So what you need to do, to modify bytecode of a class, you just need to parse the bytes, change a few bytes and write it back! Sounds rather simple, but how do you make JVM load the modifed class instead of the original? And is there a more convenient way of parsing bytecode? I mean, it's gonna get nasty when you'll try to modify something big when you have a stone hatchet as your tool.
+So what you need to do, to modify bytecode of a class, you just need to parse the bytes, change a few bytes and write it back! Sounds rather simple, but how do you make JVM load the modifed class instead of the original? And is there a more convenient way of parsing bytecode? I mean, it's gonna get nasty when you'll try to build a house with a stone hatchet.
 
 ## Libraries
-TODO
+There are not many bytecode manipulation libraries out there. Here are some of them:
+### ASM:
+- Active development.
+- Open-source: `BSD 3-Clause "New" or "Revised" License`.
+- Apparently, used by Java's compiler, SpongePowered's Mixins and various build tools.
+- Low level.
+
+### Javassist:
+- Isn't developed actively anymore, but mostly works.
+- Some features do not work (after Java 11 and/or Java 17).
+- Open source: `MPL`.
+- High level.
+
+### gclib:
+- Not supported anymore.
+- Low level.
+
+### ByteBuddy:
+- Active development.
+- Abstracts bytecode manipulation a lot.
+- Open source: `Apache License 2.0`.
+- High level.
+
