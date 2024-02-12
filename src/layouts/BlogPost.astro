@@ -12,7 +12,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={title} description={description} image={heroImage} />
 		<style>
 			main {
 				width: calc(100% - 2em);
@@ -29,7 +29,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				box-shadow: var(--box-shadow);
 			}
 			.prose {
-				width: 720px;
+				width: 920px;
 				max-width: calc(100% - 2em);
 				margin: auto;
 				padding: 1em;
@@ -77,6 +77,23 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 						<hr />
 					</div>
 					<slot />
+
+					<script src="https://giscus.app/client.js"
+						data-repo="DrTheodor/drtheodor.github.io"
+						data-repo-id="R_kgDOLO2rSg"
+						data-category="Comments"
+						data-category-id="DIC_kwDOLO2rSs4CdKMW"
+						data-mapping="pathname"
+						data-strict="1"
+						data-reactions-enabled="1"
+						data-emit-metadata="0"
+						data-input-position="top"
+						data-theme="light"
+						data-lang="en"
+						data-loading="lazy"
+						crossorigin="anonymous"
+						async>
+					</script>
 				</div>
 			</article>
 		</main>
