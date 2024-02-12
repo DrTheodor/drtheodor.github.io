@@ -11,7 +11,7 @@ Bytecode manipulation is a process, that allows you to dynamically inject/modify
 This doesn't seem very practical, but it's very useful in games running on JVM. For example: Minecraft! Minecraft's modding tools (Mixins) use bytecode manipulation to modify Minecraft's code.
 Also, it's important to know how JVM works behind the wall... i think.
 
-## Fine. How do i do "bytecode manipulation"?
+## Fine. But how?
 Well, first, you'd need to understand how JVM works.
 When you compile your `.java` files you get `.class` files. Class files are the bytecode. Bytecode is a sequence of bytes, that describes the... well, code.
 
@@ -58,5 +58,31 @@ Really, there are 2 solutions, and you should choose which one to use depending 
 ### 1. ClassLoader
 ClassLoaders are special classes that handle class loading, and, conveniently, they have a protected method, called `defineClass` which accepts an array of bytes (the bytecode), it's length, offset and the Class' name.
 Unfortunately, in the latest Java versions you can't use reflections to invoke that method, so you have to subclass the ClassLoader and override the method. Then, you can either override class loading (via checking the class name) or make the method public for later use. The difference is: one intercepts JVM loading a class, and the other allows for other classes to define classes at runtime.
+The problem with ClassLoaders is that you can't re-define a class.
+
+```java
+// This classloader allows other classes to define classes at runtime!
+public class CustomClassLoader extends ClassLoader {
+
+    // code
+
+    @Override
+    public void defineClass(String path, byte[] bytes, int length, int offset) {
+        return super.defineClass(path, bytes, length, offset);
+    }
+```
+
+```java
+// This classloader intercepts loading of other classes!
+public class CustomClassLoader extends ClassLoader {
+
+    // code
+
+    @Override
+    public void defineClass(String path, byte[] bytes, int length, int offset) {
+        return super.defineClass(path, bytes, length, offset);
+    }
+```
 
 ### 2. Agents
+Agents can be used to intercept class loading. 
