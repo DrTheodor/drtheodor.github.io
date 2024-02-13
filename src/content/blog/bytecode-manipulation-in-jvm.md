@@ -11,6 +11,9 @@ Bytecode manipulation is a thing that allows you to dynamically inject/modify/ov
 This doesn't seem very practical, but it's very useful in games running on JVM. For example: Minecraft! Minecraft's modding tools (Mixins) use bytecode manipulation to modify Minecraft's code.
 Also, it's important to know how JVM works behind the wall... i think.
 
+## The structure
+TODO
+
 ## Fine. But how?
 Well, first, you'd need to understand how JVM works.
 When you compile your `.java` files you get `.class` files. Class files are the bytecode. Bytecode is a sequence of bytes, that describes the... well, code.
