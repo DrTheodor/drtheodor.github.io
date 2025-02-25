@@ -1,0 +1,44 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import StarParticles from "../components/StarParticles.astro";
+import MagicText from "../components/MagicText.astro";
+import Starfield from "../components/Starfield.astro";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body class="bg-black">
+    <Starfield>
+      <p class="text-9xl">test</p>
+      <p class="text-9xl">test</p>
+      <p class="text-9xl">test</p>
+      <p class="text-9xl">test</p>
+      <p class="text-9xl">test</p>
+      <p class="text-9xl">test</p>
+      <p class="text-9xl">test</p>
+      <p class="text-9xl">test</p>
+
+      <MagicText text="Hello.//I'm Theo." class="text-white m-10 font-mono" />
+      <Footer />
+    </Starfield>
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    height: 100%; /* Ensure the body and html take up the full viewport height */
+    margin: 0; /* Remove default margin */
+  }
+
+  body {
+    min-height: 100%; /* Ensure the body stretches to at least the viewport height */
+    height: auto;
+  }
+</style>

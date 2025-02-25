@@ -1,0 +1,56 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import StarParticles from "../components/StarParticles.astro";
+import MagicText from "../components/MagicText.astro";
+import Starfield from "../components/starfield/Starfield.astro";
+import Base from "../layouts/Base.astro";
+---
+
+<Base title={SITE_TITLE} description={SITE_DESCRIPTION}>
+    <div slot="background">
+        <Starfield />
+        <div class="starfield blackhole-wrapper">
+            <div class="blackhole"></div>
+        </div>
+    </div>
+
+    <MagicText
+        text="Hello.//I'm Theo."
+        class="text-white font-doto text-center m-5 mt-0"
+    />
+
+    <p class="text-9xl">test</p>
+    <p class="text-9xl">test</p>
+    <p class="text-9xl">test</p>
+    <p class="text-9xl">test</p>
+    <p class="text-9xl">test</p>
+    <p class="text-9xl">test</p>
+    <p class="text-9xl">test</p>
+    <p class="text-9xl">test</p>
+</Base>
+<style>
+    .blackhole-wrapper {
+        position: absolute;
+        display: flex;
+        z-index: -1;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .blackhole {
+        display: block;
+        width: 100vh;
+        aspect-ratio: 1 / 1;
+        background-color: #000;
+        border-radius: 50%;
+        transform: translateY(-50%);
+        filter: drop-shadow(0 0 5rem #ff9204);
+    }
+
+    body {
+        height: 100%;
+    }
+</style>

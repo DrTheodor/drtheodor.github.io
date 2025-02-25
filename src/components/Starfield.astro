@@ -1,0 +1,81 @@
+---
+
+---
+
+<div class="starfield stars"></div>
+<div class="starfield twinkling"></div>
+<div class="starfield clouds"></div>
+<div class="starfield blackhole-wrapper">
+    <div class="blackhole"></div>
+</div>  
+<div class="content">
+    <slot />
+</div>
+
+<style>
+    .starfield {
+        position: fixed;
+        height: 100%;
+        top: 0; 
+        bottom: 0;
+        left: 0; 
+        right: 0;
+        width: 100%; 
+
+        will-change: transform, background-position;
+    }
+
+    .blackhole-wrapper {
+        position: absolute;
+        display: flex;
+        z-index: -1;
+        justify-content: center;
+    }
+
+    .blackhole {
+        display: block;
+        width: 100vh;
+        aspect-ratio: 1 / 1;
+        background-color: #000;
+        border-radius: 50%;
+        transform: translateY(-50%);
+        filter: drop-shadow(0 0 5rem #ff9204);
+    }
+
+    .stars {
+        z-index: -3;
+        background: #000000 url('https://i.imgur.com/YKY28eT.png') repeat top center;
+    }
+
+    .twinkling {
+        z-index: -2;
+        background: url('https://i.imgur.com/XYMF4ca.png') repeat top center;
+        animation: move-twink-back 40s linear infinite;
+    }
+
+    .clouds {
+        z-index: -1;
+        background: url('https://i.imgur.com/mHbScrQ.png') repeat top center;
+        animation: move-clouds-back 40s linear infinite;
+    }
+
+    @keyframes move-twink-back {
+        from {
+            background-position: 0 0;
+        }
+
+        to {
+            background-position: -200% 200%;
+        }
+    }
+
+    @keyframes move-clouds-back {
+        from {
+            background-position: 0 0;
+        }
+
+        to {
+            background-position: 200% 0;
+        }
+    }
+</style>

@@ -1,0 +1,50 @@
+---
+interface Props {
+  text: string;
+  duration?: number;
+  delay?: number;
+  class: string;
+}
+
+const { text, duration = 750, delay = 500, class: className } = Astro.props;
+const texts = text.split("//");
+---
+
+<h1 id="fading-header" class:list={className}>{texts[0]}</h1>
+
+<style define:vars={{ duration: delay + "ms" }}>
+  h1.fade-out {
+    opacity: 0;
+  }
+
+  h1 {
+    opacity: 1;
+    transition: opacity var(--duration) ease-in-out;
+  }
+</style>
+<script define:vars={{ texts: texts, duration: duration, delay: delay }}>
+  let index = 0;
+
+  const header = document.getElementById("fading-header");
+
+  function changeText() {
+    // Fade out the text
+    header.classList.add("fade-out");
+
+    // Wait for the fade-out transition to complete
+    setTimeout(() => {
+      // Change the text
+      header.textContent = texts[index++];
+
+      // Force a reflow to ensure the transition works
+      void header.offsetWidth; // This triggers a reflow
+
+      // Fade in the new text
+      header.classList.remove("fade-out");
+
+      if (index != texts.length) setTimeout(changeText, delay - duration);
+    }, duration); // Wait 1 second (same as the transition duration)
+  }
+
+  setTimeout(changeText, delay);
+</script>

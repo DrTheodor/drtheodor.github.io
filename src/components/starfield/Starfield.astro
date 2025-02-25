@@ -1,0 +1,145 @@
+---
+
+---
+
+<div class="starfield" id="starfield-container">
+    <canvas id="starfield-bg"></canvas>
+    <canvas id="starfield-fg"></canvas>
+</div>
+<slot />
+
+<style>
+    .starfield {
+        overflow: hidden;
+        background-color: #0a1929;
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        z-index: -1;
+    }
+
+    #starfield-bg,
+    #starfield-fg {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        will-change: transform;
+        top: 0;
+        left: 0;
+    }
+
+    /* Supposedly optimization? */
+    #starfield-bg {
+        z-index: -2;
+    }
+
+    #starfield-fg {
+        z-index: -1;
+    }
+</style>
+
+<script>
+    import type { Range } from "./util";
+
+    const nebulaIntensity = 10;
+    const bgColor = "rgb(8,8,8)";
+
+    const starsColor = "#FFFFFF";
+    const starsCount = 400;
+    const starsRotationSpeed = 3;
+    const starsSize: Range = [0.03, 0.1];
+
+    const cometFrequency = 40;
+
+    const FPS = 40;
+
+    import { drawOnCanvas } from "./draw";
+    import { DrawContext } from "./drawable/Drawable";
+    import type { Nebula } from "./drawable/Nebula";
+    import type { Star } from "./drawable/Star";
+    import { generateComets, generateNebula, generateStars } from "./util";
+import type { Comet } from "./drawable/Comet";
+
+    const container = document.getElementById("starfield-container")!;
+    const bgCanvas: HTMLCanvasElement = document.getElementById(
+        "starfield-bg",
+    )! as HTMLCanvasElement;
+    const canvas: HTMLCanvasElement = document.getElementById(
+        "starfield-fg",
+    )! as HTMLCanvasElement;
+
+    const bgCtx = bgCanvas.getContext("2d", {
+        alpha: false,
+    }) as CanvasRenderingContext2D;
+    const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+
+    const drawBg = new DrawContext(bgCtx, 0);
+    const drawFg = new DrawContext(ctx, FPS);
+
+    var nebula: Nebula;
+    var stars: Star[];
+    var comets: Comet[];
+
+    var initComplete = false;
+
+    function generateAnimations() {
+        nebula = generateNebula({
+            nebula,
+            draw: drawBg,
+            intensity: nebulaIntensity,
+        });
+
+        stars = generateStars({
+            draw: drawFg,
+            color: starsColor,
+            count: starsCount,
+            size: starsSize,
+            rotationSpeed: starsRotationSpeed,
+        });
+
+        comets = generateComets({
+            draw: drawFg,
+            frequence: cometFrequency,
+        })
+    }
+
+    function init() {
+        adjustSize();
+
+        if (!initComplete) {
+            generateAnimations();
+        }
+
+        drawOnCanvas({
+            draw: drawBg,
+            drawings: [nebula],
+            bgColor: bgColor,
+        });
+
+        drawOnCanvas({
+            draw: drawFg,
+            drawings: [...stars, ...comets],
+        });
+
+        initComplete = true;
+    }
+
+    function adjustSize() {
+        bgCanvas.width = container.offsetWidth / 3;
+        bgCanvas.height = container.offsetHeight / 3;
+        canvas.width = container.offsetWidth * 2;
+        canvas.height = container.offsetHeight * 2;
+
+        if (initComplete) {
+            drawBg.recalc();
+            drawFg.recalc();
+        }
+    }
+
+    function onResize() {
+        init();
+    }
+
+    window.addEventListener("resize", onResize);
+    window.addEventListener("load", init);
+</script>
