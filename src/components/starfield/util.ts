@@ -40,7 +40,8 @@ export const generateStars = ({
     rotationSpeed: number;
     draw: DrawContext;
 }) => {
-    const rgb = typeof color == "string" ? parseColor(color) : color;
+    // const rgb = typeof color == "string" ? parseColor(color) : color;
+    const rgb = toCanvasColor(color);
 
     const totalStars = new Array(count).fill(0).map(
         () =>
@@ -49,7 +50,7 @@ export const generateStars = ({
                 width: typeof size == "number" ? size : Random.between(size[0], size[1]),
                 distance: 120 * Math.pow(Math.random() * Math.random(), 1 / 2),
                 speed: Random.around(rotationSpeed * 0.015, 0.005),
-                rgb,
+                color: rgb,
             })
     );
 
@@ -102,6 +103,16 @@ export const getRGB = (
 ) => {
     return `rgba(${rgbChannels[0]}, ${rgbChannels[1]}, ${rgbChannels[2]}, ${opacity})`;
 };
+
+export const toCanvasColor = (
+    color: Color
+): string => {
+    if (color instanceof Array) {
+        return getRGB(color, 1);
+    }
+
+    return color;
+}
 
 export const Random = {
     between: (min: number, max: number) => min + Math.random() * (max - min),

@@ -1,0 +1,16 @@
+---
+import { Icon } from 'astro-icon/components';
+
+type Props = {
+    link: string;
+    text: string;
+    icon: string;
+}
+
+const { link, text, icon = "tabler:accessible-off" } = Astro.props;
+---
+
+<a href={link} target="_blank" class="text-slate-200 hover:text-primary">
+    <span class="border-none p-0 m-0 absolute h-[1px] w-[1px] overflow-hidden clip-path-[inset(50%)] whitespace-nowrap">{text}</span>
+    <Icon name={icon} class="w-8 h-8"></Icon>
+</a>

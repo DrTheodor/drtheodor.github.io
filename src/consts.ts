@@ -3,3 +3,4 @@
 
 export const SITE_TITLE = 'Theo\'s Workbench';
 export const SITE_DESCRIPTION = 'Welcome to my website!';
+// TODO: put all the socials here.

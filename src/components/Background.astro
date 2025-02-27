@@ -1,0 +1,18 @@
+---
+import Starfield from "./starfield/Starfield.astro";
+
+type Props = {
+    showBlackhole: boolean
+}
+
+const { showBlackhole } = Astro.props;
+---
+
+<Starfield />
+
+{
+    showBlackhole &&
+    <div class="absolute flex -z-[1] justify-center w-full">
+        <div class="block w-[100vh] aspect-square bg-black rounded-[50%] -translate-y-[50%] drop-shadow-[0_0_5rem_#ff9204]"></div>
+    </div>
+}

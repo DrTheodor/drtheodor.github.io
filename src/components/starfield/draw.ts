@@ -1,4 +1,5 @@
 import { Drawable, DrawContext } from "./drawable/Drawable";
+import { getRGB, type Color } from "./util";
 
 export const drawOnCanvas = ({
     draw,
@@ -7,7 +8,7 @@ export const drawOnCanvas = ({
 }: {
     draw: DrawContext;
     drawings: Drawable[];
-    bgColor?: string;
+    bgColor?: Color;
 }) => {
     const width = draw.canvas.width;
     const height = draw.canvas.height;
@@ -18,6 +19,8 @@ export const drawOnCanvas = ({
     let lastTimestamp = 0;
     let timeStep = 1000 / draw.FPS;
 
+    const color = bgColor instanceof Array ? getRGB(bgColor, 1) : bgColor;
+
     const drawMainCanvas = () => {
         if (draw.FPS) {
             animation = requestAnimationFrame(drawMainCanvas);
@@ -27,8 +30,8 @@ export const drawOnCanvas = ({
         }
 
         draw.ctx.clearRect(0, 0, width, height);
-        if (bgColor) {
-            draw.ctx.fillStyle = bgColor;
+        if (color) {
+            draw.ctx.fillStyle = color;
             draw.ctx.fillRect(0, 0, width, height);
         }
 

@@ -1,69 +1,32 @@
----
----
-
-<div class="starfield" id="starfield-container" transition:persist>
-    <canvas id="starfield-bg" class="starfield-canvas"></canvas>
-    <canvas id="starfield-fg" class="starfield-canvas"></canvas>
-
-    <slot />
-</div>
-
-<style>
-    .starfield-canvas {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        /*will-change: transform;*/
-        top: 0;
-        left: 0;
-        opacity: 0;
-    }
-
-    .starfield-fadein {
-        opacity: 1;
-        transition: opacity 1s ease-in-out;
-    }
-
-    .starfield {
-        overflow: hidden;
-        background-color: rgb(8, 8, 8);
-        height: 100%;
-        width: 100%;
-        position: fixed;
-        z-index: -1;
-    }
-
-    /* Supposedly optimization? */
-    #starfield-bg {
-        z-index: -2;
-    }
-
-    #starfield-fg {
-        z-index: -1;
-    }
-</style>
-
-<script>
-    import type { Range } from "./util";
-
-    const nebulaIntensity = 10;
-    const bgColor = "rgb(8,8,8)";
-
-    const starsColor = "#FFFFFF";
-    const starsCount = 400;
-    const starsRotationSpeed = 3;
-    const starsSize: Range = [0.03, 0.1];
-
-    const cometFrequency = 40;
-
-    const FPS = 40;
-
-    import { drawOnCanvas } from "./draw";
+import type { Color, Range } from "./util";
+import { drawOnCanvas } from "./draw";
     import { DrawContext } from "./drawable/Drawable";
     import type { Nebula } from "./drawable/Nebula";
     import type { Star } from "./drawable/Star";
     import { generateComets, generateNebula, generateStars } from "./util";
 import type { Comet } from "./drawable/Comet";
+
+
+export type StarfieldConfig = {
+    bgColor: Color;
+    nebulaIntensity: number;
+    starsColor: Color;
+    starsCount: number;
+    starsRotationSpeed: number;
+    starsSize: Range;
+    cometFrequency: number;
+}
+
+export function doStarfield(
+    { bgColor,
+    nebulaIntensity,
+    starsColor,
+    starsCount,
+    starsRotationSpeed,
+    starsSize,
+    cometFrequency } : StarfieldConfig
+) {
+    const FPS = 40;
 
     const container = document.getElementById("starfield-container")!;
     const bgCanvas: HTMLCanvasElement = document.getElementById(
@@ -151,4 +114,4 @@ import type { Comet } from "./drawable/Comet";
 
     window.addEventListener("resize", onResize);
     window.addEventListener("load", init);
-</script>
+}

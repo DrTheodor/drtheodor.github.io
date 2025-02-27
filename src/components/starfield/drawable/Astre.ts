@@ -5,7 +5,7 @@ export type AstreArgs = {
   width: number;
   speed: number;
   distance: number;
-  rgb: [number, number, number];
+  color: string;
   origin?: Astre;
   invisible?: boolean;
   startAngle?: number;
@@ -13,7 +13,7 @@ export type AstreArgs = {
 
 export abstract class Astre extends Drawable {
   relativeWidth: number;
-  rgb: [number, number, number];
+  color: string;
   speed: number;
   angle: number;
   origin?: Astre;
@@ -27,13 +27,13 @@ export abstract class Astre extends Drawable {
     width,
     speed,
     distance,
-    rgb,
+    color,
     origin,
     startAngle = Math.random() * 360,
   }: AstreArgs) {
     super({ draw });
     this.relativeWidth = width;
-    this.rgb = rgb;
+    this.color = color;
     this.speed = speed;
     this.relativeDistance = distance;
     this.origin = origin;
