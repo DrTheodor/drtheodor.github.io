@@ -1,36 +1,18 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
 import { SITE_TITLE } from "../consts";
-import SocialButton from "./SocialButton.astro";
+import SocialLinks from "./SocialLinks.astro";
 ---
 
 <header>
 	<nav>
 		<h2><a href="/" data-astro-reload>{SITE_TITLE}</a></h2>
-		<div class="internal-links">
+		<div>
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
-		<div class="social-links">
-			<SocialButton
-				icon="tabler:brand-mastodon"
-				link="https://m.webtoo.ls/@astro"
-				text="Follow Astro on Mastodon"
-			/>
-
-			<SocialButton
-				icon="tabler:brand-x"
-				link="https://twitter.com/astrodotbuild"
-				text="Follow Astro on Twitter"
-			/>
-
-			<SocialButton
-				icon="tabler:brand-github"
-				link="https://github.com/withastro/astro"
-				text="Go to Astro's GitHub repo"
-			/>
-		</div>
+		<SocialLinks />
 	</nav>
 </header>
 <style>

@@ -5,15 +5,15 @@ import Footer from '../components/Footer.astro';
 import type { ComponentProps } from 'astro/types';
 import Background from '../components/Background.astro';
 
-type Props = { main?: boolean, class?: string } & ComponentProps<typeof BaseHead>;
+type Props = { main?: boolean, class?: string, image?: string } & ComponentProps<typeof BaseHead>;
 
-const { main = false, class: className = "", ...props } = Astro.props;
+const { main = false, class: className = "", image, ...props } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en" class="h-full">
 	<head>
-		<BaseHead {...props} />
+		<BaseHead {...props} image={image} />
 	</head>
 	<body class="text-slate-50 bg-slate-900 w-full">
         <Background showBlackhole={main} />

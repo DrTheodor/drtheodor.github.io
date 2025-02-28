@@ -1,30 +1,12 @@
 ---
-import SocialButton from "./SocialButton.astro";
+import SocialLinks from "./SocialLinks.astro";
 
 const today = new Date();
 ---
 
 <footer class="text-slate-300 pt-8 pr-4 pb-8 pl-4 text-center bg-linear-to-b from-slate-800/50 to-slate-950">
 	&copy; {today.getFullYear()} Made with Astro 🚀 and incompetence.
-	<div class="social-links flex justify-center gap-4 mt-6">
-		<SocialButton
-			icon="tabler:brand-mastodon"
-			link="https://m.webtoo.ls/@astro"
-			text="Follow Astro on Mastodon"
-		/>
-
-		<SocialButton
-			icon="tabler:brand-x"
-			link="https://twitter.com/astrodotbuild"
-			text="Follow Astro on Twitter"
-		/>
-
-		<SocialButton
-			icon="tabler:brand-github"
-			link="https://github.com/withastro/astro"
-			text="Go to Astro's GitHub repo"
-		/>
-	</div>
+	<SocialLinks class="justify-center mt-6" />
 </footer>
 <style>
 	footer {
