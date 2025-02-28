@@ -4,48 +4,14 @@ import { SITE_TITLE } from "../consts";
 import SocialLinks from "./SocialLinks.astro";
 ---
 
-<header>
-	<nav>
-		<h2><a href="/" data-astro-reload>{SITE_TITLE}</a></h2>
+<header class="m-0 pt-0 pb-0 pr-2 pl-2 text-white">
+	<nav class="flex items-center justify-between pt-4 pb-8">
+		<h2 class="m-0 text-2xl p-2"><a href="/" data-astro-reload>{SITE_TITLE}</a></h2>
 		<div>
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
+			<HeaderLink href="/" class="p-2">Home</HeaderLink>
+			<HeaderLink href="/blog" class="p-2">Blog</HeaderLink>
+			<HeaderLink href="/about" class="p-2">About</HeaderLink>
 		</div>
-		<SocialLinks />
+		<SocialLinks class="max-[720px]:hidden" />
 	</nav>
 </header>
-<style>
-	header {
-		margin: 0;
-		padding: 0 1em;
-		color: white;
-	}
-
-	h2 {
-		margin: 0;
-		font-size: 1em;
-	}
-
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-
-	nav a {
-		padding: 1em 0.5em;
-	}
-
-	.social-links,
-	.social-links a {
-		display: flex;
-		gap: 1em;
-	}
-
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
-		}
-	}
-</style>
