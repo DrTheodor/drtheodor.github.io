@@ -14,29 +14,39 @@ const posts = (await getCollection("blog")).sort(
 );
 ---
 
-<Base title={SITE_TITLE} description={SITE_DESCRIPTION} class="w-240">
+<Base title={SITE_TITLE} description={SITE_DESCRIPTION}>
 	<section>
 		<ul class="flex flex-wrap gap-8 list-none m-0 p-0">
 			{
-				posts.filter((post) => !post.data.draft).map((post, i) => (
-					<li>
-						<a href={`/blog/${post.id}/`}>
-							<Image
-								width={720}
-								height={360}
-								src={post.data.heroImage}
-								alt=""
-								class:list={[{ "w-full": i == 0 }]}
-							/>
-							<h4 class:list={["m-0", { "text-4xl": i == 0 }]}>
-								{post.data.title}
-							</h4>
-							<p class="m-0 text-slate-400">
-								<FormattedDate date={post.data.pubDate} />
-							</p>
-						</a>
-					</li>
-				))
+				posts
+					.filter((post) => !post.data.draft)
+					.map((post, i) => (
+						<li>
+							<a
+								href={`/blog/${post.id}/`}
+								class="no-underline block"
+							>
+								<Image
+									width={720}
+									height={360}
+									src={post.data.heroImage}
+									alt=""
+									class:list={[
+										{ "w-full": i == 0 },
+										"mb-2 rounded-xl",
+									]}
+								/>
+								<h4
+									class:list={["m-0", { "text-4xl": i == 0 }]}
+								>
+									{post.data.title}
+								</h4>
+								<p class="m-0 text-slate-400">
+									<FormattedDate date={post.data.pubDate} />
+								</p>
+							</a>
+						</li>
+					))
 			}
 		</ul>
 	</section>
@@ -45,44 +55,42 @@ const posts = (await getCollection("blog")).sort(
 	ul li {
 		width: calc(50% - 1rem);
 	}
-	ul li * {
-		text-decoration: none;
-		transition: 0.2s ease;
-	}
+
 	ul li:first-child {
 		width: 100%;
 		margin-bottom: 1rem;
 		text-align: center;
 	}
 
-	ul li img {
-		margin-bottom: 0.5rem;
-		border-radius: 12px;
+	ul li a:hover img {
+		box-shadow:
+			0 2px 6px rgba(var(--gray), 25%),
+			0 8px 24px rgba(var(--gray), 33%),
+			0 16px 32px rgba(var(--gray), 33%);
 	}
-	ul li a {
-		display: block;
+
+	ul li * {
+		transition: 200ms ease;
 	}
-	.date {
-		margin: 0;
-		color: rgb(var(--gray));
-	}
+
 	ul li a:hover * {
-		color: rgb(var(--accent));
+		color: var(--color-slate-200);
 	}
-	ul a:hover img {
-		box-shadow: var(--box-shadow);
-	}
+
 	@media (max-width: 720px) {
 		ul {
 			gap: 0.5em;
 		}
+
 		ul li {
 			width: 100%;
 			text-align: center;
 		}
+
 		ul li:first-child {
 			margin-bottom: 0;
 		}
+
 		ul li:first-child .title {
 			font-size: 1.563em;
 		}

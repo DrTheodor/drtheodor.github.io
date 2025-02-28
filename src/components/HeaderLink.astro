@@ -18,14 +18,9 @@ const realActiveClass = isActive ? activeClass : "";
 		realActiveClass,
 		{ "font-bold border-b-4": isActive },
 		"inline-block no-underline border-b-slate-200",
+		"active:font-bold"
 	]}
 	{...props}
 >
 	<slot />
 </a>
-<style>
-	a.active {
-		font-weight: bolder;
-		text-decoration: underline;
-	}
-</style>
