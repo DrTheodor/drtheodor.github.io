@@ -2,7 +2,8 @@
 import type { CollectionEntry } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
 import Base from "./Base.astro";
-import { Image } from 'astro:assets'
+import { Image } from "astro:assets";
+import TextContent from "../components/TextContent.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
@@ -45,7 +46,10 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				<h1 class="mt-2 mb-2">{title}</h1>
 				<hr class="border-solid border-t-2 border-slate-500" />
 			</div>
-			<slot />
+
+			<TextContent>
+				<slot />
+			</TextContent>
 		</div>
 	</article>
 </Base>

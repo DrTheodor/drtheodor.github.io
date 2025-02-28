@@ -2,6 +2,7 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import BlogPost from "../../layouts/BlogPost.astro";
 import { render } from "astro:content";
+import TextContent from "../../components/TextContent.astro";
 
 export async function getStaticPaths() {
 	const posts = await getCollection("blog");
@@ -22,9 +23,9 @@ const { Content } = await render(post);
 	<script
 		src="https://giscus.app/client.js"
 		data-repo="DrTheodor/drtheodor.github.io"
-		data-repo-id="R_kgDOLO2rSg"
+		data-repo-id="R_kgDOOAqhvw"
 		data-category="Comments"
-		data-category-id="DIC_kwDOLO2rSs4CdKMW"
+		data-category-id="DIC_kwDOOAqhv84Cna3H"
 		data-mapping="pathname"
 		data-strict="0"
 		data-reactions-enabled="1"

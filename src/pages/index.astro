@@ -3,41 +3,23 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import MagicText from "../components/MagicText.astro";
 import Starfield from "../components/starfield/Starfield.astro";
 import Base from "../layouts/Base.astro";
+import TextContent from "../components/TextContent.astro";
 ---
 
-<Base title={SITE_TITLE} description={SITE_DESCRIPTION} main={true} class="h-full" >
-    
+<Base
+    title={SITE_TITLE}
+    description={SITE_DESCRIPTION}
+    main={true}
+    class="h-full"
+>
     <div class="h-100">
-    <MagicText
-        text="Hello.//I'm Theo."
-        class="text-white font-doto text-center m-5 mt-0 text-9xl"
-    />
+        <MagicText
+            text="Hello.//I'm Theo."
+            class="text-white font-doto text-center m-5 mt-0 text-9xl"
+        />
     </div>
 
-    <div class="mt-5 border-solid rounded-xl bg-background-light -mr-[25%] -ml-[25%] p-10">
+    <TextContent>
         Hmm... What should I write here?
-    </div>
+    </TextContent>
 </Base>
-<style>
-    .blackhole-wrapper {
-        position: absolute;
-        display: flex;
-        z-index: -1;
-        justify-content: center;
-        width: 100%;
-    }
-
-    .blackhole {
-        display: block;
-        width: 100vh;
-        aspect-ratio: 1 / 1;
-        background-color: #000;
-        border-radius: 50%;
-        transform: translateY(-50%);
-        filter: drop-shadow(0 0 5rem #ff9204);
-    }
-
-    body {
-        height: 100%;
-    }
-</style>

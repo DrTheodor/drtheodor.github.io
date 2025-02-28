@@ -15,11 +15,11 @@ const { main = false, class: className = "", image, ...props } = Astro.props;
 	<head>
 		<BaseHead {...props} image={image} />
 	</head>
-	<body class="text-slate-50 bg-slate-900 w-full">
+	<body class="text-slate-50 bg-slate-900 w-full h-full">
         <Background showBlackhole={main} />
 		<Header />
         
-		<main class:list={[className, "h-full"]}>
+		<main class:list={[className]}>
 			<slot />
 		</main>
 		<Footer />
