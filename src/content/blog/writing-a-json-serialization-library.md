@@ -1,5 +1,8 @@
 ---
 title: Writing a JSON Serialization Library
+category: Programming
+tags:
+  - Java
 ---
 
 ## The Why
