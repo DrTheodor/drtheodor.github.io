@@ -1,5 +1,6 @@
 ---
 title: Writing a JSON Serialization Library
+pubDate: Apr 15, 2025
 category: Programming
 tags:
   - Java
